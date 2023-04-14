@@ -586,8 +586,8 @@ describe('unit/Stakes', () => {
           await Time.setAndMine(timestamps.endTime + 1)
         })
 
-        it('anyone can unstake', async () => {
-          await subject(actors.lpUser1())
+        it('no one can unstake except owner', async () => {
+          await expect(subject(actors.lpUser1())).to.be.revertedWith("UniswapV3Staker::unstakeToken: only owner can withdraw token");
         })
 
         it('owner can unstake', async () => {

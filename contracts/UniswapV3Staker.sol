@@ -211,13 +211,11 @@ contract UniswapV3Staker is IUniswapV3Staker, Multicall {
     /// @inheritdoc IUniswapV3Staker
     function unstakeToken(IncentiveKey memory key, uint256 tokenId) external override {
         Deposit memory deposit = deposits[tokenId];
-        // anyone can call unstakeToken if the block time is after the end time of the incentive
-        if (block.timestamp < key.endTime) {
-            require(
-                deposit.owner == msg.sender,
-                'UniswapV3Staker::unstakeToken: only owner can withdraw token before incentive end time'
-            );
-        }
+        // only owner can call unstakeToken
+        require(
+            deposit.owner == msg.sender,
+            'UniswapV3Staker::unstakeToken: only owner can withdraw token'
+        );
 
         bytes32 incentiveId = IncentiveId.compute(key);
 

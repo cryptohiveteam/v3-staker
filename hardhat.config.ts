@@ -59,7 +59,10 @@ const config: HardhatUserConfig = {
       url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.INFURA_API_KEY}`,
     },
     arbitrum: {
-      url: `https://arbitrum-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      url: "https://arbitrum-mainnet.infura.io/v3/98f6cf967f844499a81b2cfb81fbbede",
+      accounts: [
+        process.env.DEPLOYER || "",
+      ]
     },
     optimismKovan: {
       url: `https://optimism-kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
